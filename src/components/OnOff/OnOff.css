@@ -1,0 +1,17 @@
+.round {
+    margin-left: 10px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: gray;
+}
+.wrapper {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+}
+.rectangle {
+    width: 200px;
+    height: 100px;
+
+}
