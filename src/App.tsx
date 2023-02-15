@@ -20,7 +20,9 @@ function App() {
             <Rating value={4}/>
             <Rating value={5}/>
 
-            <OnOff on={true} off={false}/>
+            <OnOff on={false} />
+            <OnOff on={true} />
+            <OnOff on={false} />
 
 
 
