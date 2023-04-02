@@ -5,7 +5,7 @@ type OnOffPropsType = {
     onChange: ( on: boolean )=> void
 }
 
-const OnOff: React.FC<OnOffPropsType> = (props) => {
+export const OnOff: React.FC<OnOffPropsType> = (props) => {
 
     const onStyle = {
         width: "30px",
@@ -42,6 +42,3 @@ const OnOff: React.FC<OnOffPropsType> = (props) => {
         </div>
     );
 };
-
-
-export default OnOff;
