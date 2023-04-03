@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 
 type OnOffPropsType = {
     onChange: (on: boolean) => void
+    defaultOn?: boolean
 }
 
-const UncontrolledOnOff: React.FC<OnOffPropsType> = (props) => {
+export const UncontrolledOnOff: React.FC<OnOffPropsType> = (props) => {
 
-    let [on, setOn] = useState(false);
+    let [on, setOn] = useState(props.defaultOn ? props.defaultOn : false);
 
     const onStyle = {
         width: "30px",
@@ -52,6 +53,3 @@ const UncontrolledOnOff: React.FC<OnOffPropsType> = (props) => {
         </div>
     );
 };
-
-
-export default UncontrolledOnOff;
