@@ -25,7 +25,7 @@ export const Example1 = () => {
     }
 
     return <>
-        <button onClick={ () => setCounter(counter+1)}></button>
+        <button onClick={ () => setCounter(counter+1)}>inc</button>
         <button onClick={addUser}>add user</button>
         <NewMessagesCounter count={counter}/>
         <Users users={users} />

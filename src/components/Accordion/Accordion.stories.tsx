@@ -39,6 +39,7 @@ UsersUncollapsedMode.args = {
         {title: 'Viktor', value: 4}]
 }
 
+
 export const ModeChanging: Story<AccordionPropsType> = (args) => {
     const [value, setValue] = useState<boolean>(true)
 
