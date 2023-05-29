@@ -5,19 +5,21 @@ type AccordionPropsType = {
     titleValue: string
 }
 
-export function UncontrolledAccordion(props: AccordionPropsType) {
+export const UncontrolledAccordion: React.FC<AccordionPropsType> = React.memo((props) => {
     console.log("Uncontrolled Accordion rendering")
 
-   // let [collapsed, setCollapsed] = useState(false);
+    // let [collapsed, setCollapsed] = useState(false);
     let [state, dispatch] = useReducer(reducer, {collapsed: false});
 
     return (
         <div>
-            <AccordionTitle title={props.titleValue} onClick={() => {dispatch({type: TOGGLE_COLLAPSED})}}/>
+            <AccordionTitle title={props.titleValue} onClick={() => {
+                dispatch({type: TOGGLE_COLLAPSED})
+            }}/>
             {!state.collapsed && <AccordionBody/>}
         </div>
     )
-}
+})
 
 type AccordionTitlePropsType = {
     title: string

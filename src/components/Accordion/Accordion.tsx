@@ -19,18 +19,19 @@ export type AccordionPropsType = {
     onClick: (value: any) => void
 }
 
-export function Accordion(props: AccordionPropsType) {
-    console.log("Accordion rendering")
-    return (
-        <div>
-            <AccordionTitle
-                title={props.titleValue}
-                onChange={props.onChange}
-            />
-            {!props.collapsed && <AccordionBody items={props.items} onClick={props.onClick}/>}
-        </div>
-    )
-}
+export const Accordion: React.FC<AccordionPropsType> = React.memo(
+    function Accordion(props: AccordionPropsType) {
+        console.log("Accordion rendering")
+        return (
+            <div>
+                <AccordionTitle
+                    title={props.titleValue}
+                    onChange={props.onChange}
+                />
+                {!props.collapsed && <AccordionBody items={props.items} onClick={props.onClick}/>}
+            </div>
+        )
+    })
 
 type AccordionTitlePropsType = {
     title: string
@@ -39,7 +40,7 @@ type AccordionTitlePropsType = {
 
 function AccordionTitle(props: AccordionTitlePropsType) {
     console.log("AccordionTitle rendering")
-    return <h3 onClick={(e)=>props.onChange()}>{props.title}</h3>
+    return <h3 onClick={(e) => props.onChange()}>{props.title}</h3>
 }
 
 type AccordionBodyPropsType = {
@@ -50,6 +51,8 @@ type AccordionBodyPropsType = {
 function AccordionBody(props: AccordionBodyPropsType) {
     console.log("AccordionBody rendering")
     return <ul>
-        { props.items.map( (i, index) => <li onClick={()=> {props.onClick(i.value)}}>{i.title}</li>  )}
+        {props.items.map((i, index) => <li onClick={() => {
+            props.onClick(i.value)
+        }}>{i.title}</li>)}
     </ul>
 }

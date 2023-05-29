@@ -12,11 +12,11 @@ export const DifficultCountingExample = () => {
     let resultA = 1;
     let resultB = 1;
 
-    resultA = useMemo(()=> {
+    resultA = useMemo(() => {
         let tempResultA = 1
         for (let i = 1; i <= a; i++) {
             let fake = 0
-            while (fake < 10000000){
+            while (fake < 10000000) {
                 fake++
                 const fakeValue = Math.random()
             }
@@ -43,10 +43,10 @@ export const DifficultCountingExample = () => {
     </>
 }
 
-const UsersSecret = (props: { users: Array<string>}) => {
+const UsersSecret = (props: { users: Array<string> }) => {
     console.log('Users secret')
     return <div>
-        {props.users.map((u,i) => <div key={i}>{u}</div>)}
+        {props.users.map((u, i) => <div key={i}>{u}</div>)}
     </div>
 }
 
@@ -55,9 +55,9 @@ const Users = React.memo(UsersSecret)
 export const HelpsToReactMemo = () => {
     console.log('HelpsToReactMemo')
     const [counter, setCounter] = useState(0)
-    const [users, setUsers] = useState(["Vlad","Ilya","Pasha"])
+    const [users, setUsers] = useState(["Vlad", "Ilya", "Pasha"])
 
-    const newArray = useMemo(()=> {
+    const newArray = useMemo(() => {
         const newArray = users.filter(u => u.toLowerCase().indexOf('a') > -1)
         return newArray
     }, [users])
@@ -68,10 +68,10 @@ export const HelpsToReactMemo = () => {
     }
 
     return <>
-        <button onClick={ () => setCounter(counter+1)}>+</button>
-        <button onClick={()=>addUser()}>add user</button>
+        <button onClick={() => setCounter(counter + 1)}>+</button>
+        <button onClick={() => addUser()}>add user</button>
         {counter}
-        <Users users={users} />
+        <Users users={users}/>
     </>
 
 }
