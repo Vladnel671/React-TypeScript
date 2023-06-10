@@ -1,4 +1,4 @@
-import React, {KeyboardEvent, useEffect, useState} from 'react';
+import React, {KeyboardEvent, useEffect, useMemo, useState} from 'react';
 import styles from './Select.module.css'
 
 type ItemType = {
@@ -12,12 +12,13 @@ type SelectPropsType = {
     items: ItemType[]
 }
 
-export const Select: React.FC<SelectPropsType> = React.memo((props) => {
+export const Select = React.memo((props: SelectPropsType) => {
+    console.log('select rerender!')
     const [active, setActive] = useState(false)
     const [hoveredElementValue, setHoveredElementValue] = useState(props.value)
 
-    const selectedItem = props.items.find(i => i.value === props.value)
-    const hoveredItem = props.items.find(i => i.value === hoveredElementValue)
+    const selectedItem = useMemo(() => props.items.find(i => i.value === props.value), [props.items, props.value])
+    const hoveredItem = useMemo(() => props.items.find(i => i.value === hoveredElementValue), [props.items, hoveredElementValue])
 
     useEffect(() => {
         setHoveredElementValue(props.value)

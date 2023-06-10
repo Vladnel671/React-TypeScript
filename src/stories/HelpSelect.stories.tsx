@@ -1,15 +1,32 @@
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import React from 'react';
 import './HelpSelect.css'
 import {Select} from "../components/Select/Select";
 
+type CounterPropsType = {
+    counter: number
+    onInc: () => void
+    onDec: () => void
+}
+
+const CounterWithoutReactMemo: React.FC<CounterPropsType> = (props) => {
+    console.log('counter rerender!')
+    return (
+        <>
+            <h3>Counter: {props.counter}</h3>
+            <button onClick={props.onInc}> +</button>
+            <button onClick={props.onDec}> -</button>
+        </>
+    )
+}
+const Counter = React.memo(CounterWithoutReactMemo)
 export default {
     title: 'HelperSelect',
     component: Select,
 }
 export const HelperSelect = () => {
 
-    const cities = [
+    const cities = useMemo(() => [
         {value: '1', title: 'Minsk', population: 1975170, country: 'Belarus'},
         {value: '2', title: 'Moscow', population: 12678079, country: 'Russia'},
         {value: '3', title: 'Kiev', population: 2884000, country: 'Ukraine'},
@@ -27,17 +44,16 @@ export const HelperSelect = () => {
         {value: '15', title: 'Durban', population: 595061, country: 'South Africa'},
         {value: '16', title: 'Bratislava', population: 437725, country: 'Slovakia'},
         {value: '17', title: 'Milan', population: 1378689, country: 'Italy'},
-    ];
+    ], []);
 
-    const citiesStartingWithM = cities.filter(city => city.title.startsWith('M'));
-    const citiesWithPopulationGreaterThan3M = cities.filter(city => city.population > 3000000);
-    const citiesInUSA = cities.filter(city => city.country === 'USA');
+    const citiesStartingWithM = useMemo(() => cities.filter((city) => city.title.startsWith('M')), [cities])
+    const citiesWithPopulationGreaterThan3M = useMemo(() => cities.filter((city) => city.population > 3000000), [cities])
+    const citiesInUSA = useMemo(() => cities.filter((city) => city.country === 'USA'), [cities])
+
 
     const [value1, setValue1] = useState(citiesStartingWithM[0].value);
     const [value2, setValue2] = useState(citiesWithPopulationGreaterThan3M[0].value);
     const [value3, setValue3] = useState(citiesInUSA[0].value);
-
-    console.log("rerender!")
 
     const [counter, setCounter] = useState(0)
     const inc = () => {
@@ -65,9 +81,9 @@ export const HelperSelect = () => {
                         value={value3}
                         items={citiesInUSA}/>
             </div>
-            <h3>Counter: {counter}</h3>
-            <button onClick={inc}> +</button>
-            <button onClick={dec}> -</button>
+            <div className={'HelperCounter'}>
+                <Counter counter={counter} onInc={inc} onDec={dec}/>
+            </div>
         </>
     )
 }
